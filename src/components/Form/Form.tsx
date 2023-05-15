@@ -3,6 +3,26 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
+const ADD_DATA = 'ADD_DATA';
+
+interface Errors {
+  name: string;
+  secondName: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+  confirmEmail: string;
+};
+
+interface Touched {
+  name: string;
+  secondName: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+  confirmEmail: string;
+};
+
 interface Values {
   name: string,
   secondName: string,
@@ -10,16 +30,29 @@ interface Values {
   confirmPassword: string,
   email: string,
   confirmEmail: string,
-}
+};
 
+// interface HandleChange
 
-const dispatch = useDispatch();
-
-
+type TypeForkmikProps = {
+  values: Values,
+  errors: Errors,
+  touched: Touched,
+  handleChange: (e: React.ChangeEvent<any>) => void,
+  handleBlur: {
+    (e: React.FocusEvent<any, Element>): void;
+    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
+  },
+  isValid: Boolean,
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void,
+  dirty: boolean
+};
 
 
 
 const Form = () => {
+  const dispatch = useDispatch();
+
   const validationSchema = yup.object().shape({
     name: yup.string().typeError('Должно быть строкой').required('Обязательно'),
     secondName: yup.string().typeError('Должно быть строкой').required('Обязательно'),
@@ -27,12 +60,11 @@ const Form = () => {
     confirmPassword: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно'),
     email: yup.string().email('Введите верный email').required('Обязательно'),
     confirmEmail: yup.string().email('Введите верный email').oneOf([yup.ref('email')], 'Email не совпадают').required('Обязательно')
-  })
+  });
 
-  function saveData(values: Values) : void {
-    console.log(values)
-    dispatch({ type: 'ADD_DATA', payload: values})
-  }
+  function saveData(values: Values): void {
+    dispatch({ type: ADD_DATA, payload: values })
+  };
 
   return (
     <div>
@@ -70,7 +102,6 @@ const Form = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.secondName} />
-
               </p>
               {touched.secondName && errors.secondName && <p>{errors.secondName}</p>}
 
@@ -106,14 +137,16 @@ const Form = () => {
               {touched.confirmEmail && errors.confirmEmail && <p>{errors.confirmEmail}</p>}
               <button
                 disabled={!isValid && !dirty}
-                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => { handleSubmit(); saveData( values ) }}
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                  handleSubmit(); saveData(values)
+                }}
                 type='submit' >Отправить</button>
             </div>
           )
         }}
       </Formik>
     </div>
-  )
-}
+  );
+};
 
 export default Form
