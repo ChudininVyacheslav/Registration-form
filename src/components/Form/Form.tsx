@@ -1,27 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 const ADD_DATA = 'ADD_DATA';
-
-interface Errors {
-  name: string;
-  secondName: string;
-  password: string;
-  confirmPassword: string;
-  email: string;
-  confirmEmail: string;
-};
-
-interface Touched {
-  name: string;
-  secondName: string;
-  password: string;
-  confirmPassword: string;
-  email: string;
-  confirmEmail: string;
-};
 
 interface Values {
   name: string,
@@ -31,24 +13,6 @@ interface Values {
   email: string,
   confirmEmail: string,
 };
-
-// interface HandleChange
-
-type TypeForkmikProps = {
-  values: Values,
-  errors: Errors,
-  touched: Touched,
-  handleChange: (e: React.ChangeEvent<any>) => void,
-  handleBlur: {
-    (e: React.FocusEvent<any, Element>): void;
-    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-  },
-  isValid: Boolean,
-  handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void,
-  dirty: boolean
-};
-
-
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -91,7 +55,7 @@ const Form = () => {
           isValid,
           handleSubmit,
           dirty
-        }): any => {
+        }) => {
           return (
             <div>
               <p>
