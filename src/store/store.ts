@@ -1,5 +1,4 @@
 import { legacy_createStore as createStore } from 'redux';
-import { reducer } from './reducer';
+import { registrationFormReducer } from './registration/registrationFormReducer';
 
-
-export const store = createStore(reducer);
+export const store = createStore(registrationFormReducer);

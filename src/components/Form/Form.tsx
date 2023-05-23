@@ -1,49 +1,38 @@
 import React from 'react';
+import styles from './Form.module.scss'
 import { Formik } from 'formik';
-import * as yup from 'yup';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Values } from './interfaces';
+import { ADD_DATA } from '../../store/registration/actionTypes';
+import { validationSchema } from './registrationFormSchema';
+import { initialValues } from './initialValues';
+import Title from './Title/Title';
+import ButtonSubmit from './ButtonSubmit/ButtonSubmit';
+import ButtonDelete from './ButtonDelete/ButtonDelete';
+import ButtonClear from './ButtonClear/ButtonClear';
+import Input from './Input/Input';
 
-const ADD_DATA = 'ADD_DATA';
+// установил React-Router-Dom
 
-interface Values {
-  name: string,
-  secondName: string,
-  password: string,
-  confirmPassword: string,
-  email: string,
-  confirmEmail: string,
-};
+let form = document.getElementById('form');
+
+
 
 const Form = () => {
   const dispatch = useDispatch();
 
-  const validationSchema = yup.object().shape({
-    name: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-    secondName: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-    password: yup.string().typeError('Должно быть строкой').required('Обязательно'),
-    confirmPassword: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают').required('Обязательно'),
-    email: yup.string().email('Введите верный email').required('Обязательно'),
-    confirmEmail: yup.string().email('Введите верный email').oneOf([yup.ref('email')], 'Email не совпадают').required('Обязательно')
-  });
-
   function saveData(values: Values): void {
-    dispatch({ type: ADD_DATA, payload: values })
+    dispatch({ type: ADD_DATA, payload: values });
   };
 
   return (
-    <div>
-      <h1>Anywhere in your app!</h1>
+    <div className={styles.form}>
+      <Title />
       <Formik
-        initialValues={{
-          name: '',
-          secondName: '',
-          password: '',
-          confirmPassword: '',
-          email: '',
-          confirmEmail: '',
-        }}
+        initialValues={initialValues}
         validateOnBlur
-        onSubmit={(values) => { console.log(values) }}
+        onSubmit={(values) => { saveData(values) }}
+        // 
         validationSchema={validationSchema}
       >
         {({
@@ -58,59 +47,88 @@ const Form = () => {
         }) => {
           return (
             <div>
-              <p>
-                <label htmlFor='secondName'>Фамилия</label><br />
-                <input
-                  type='text'
+              <form
+                id='form'
+                onSubmit={handleSubmit}>
+                <Input
+                  label='Фамилия'
                   name='secondName'
+                  type='text'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.secondName} />
-              </p>
-              {touched.secondName && errors.secondName && <p>{errors.secondName}</p>}
+                  value={values.secondName}
+                  errorMessage={touched.secondName && errors.secondName
+                    ? errors.secondName
+                    :undefined}
+                />
+                 <Input
+                  label='Имя'
+                  name='name'
+                  type='text'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  errorMessage={touched.name && errors.name
+                    ? errors.name
+                    :undefined}
+                />
+                <Input
+                  label='Пароль'
+                  name='password'
+                  type='password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  errorMessage={touched.password && errors.password
+                    ? errors.password
+                    :undefined}
+                />
+                <Input
+                  label='Подтвердите пароль'
+                  name='confirmPassword'
+                  type='password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmPassword}
+                  errorMessage={touched.confirmPassword && errors.confirmPassword
+                    ? errors.confirmPassword
+                    :undefined}
+                />
+                <Input
+                  label='Email'
+                  name='email'
+                  type='email'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  errorMessage={touched.email && errors.email
+                    ? errors.email
+                    :undefined}
+                />
+                 <Input
+                  label='Подтвердите email'
+                  name='confirmEmail'
+                  type='email'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmEmail}
+                  errorMessage={touched.confirmEmail && errors.confirmEmail
+                    ? errors.confirmEmail
+                    :undefined}
+                />
+                <ButtonSubmit
+                  disabled={!isValid && !dirty} />
+              </form>
 
-              <p>
-                <label htmlFor='name'>Имя</label><br />
-                <input type='text' name='name' onChange={handleChange} onBlur={handleBlur} value={values.name} />
-              </p>
-              {touched.name && errors.name && <p>{errors.name}</p>}
-
-
-              <p>
-                <label htmlFor='password'>Пароль</label><br />
-                <input type='password' name='password' onChange={handleChange} onBlur={handleBlur} value={values.password} />
-              </p>
-              {touched.password && errors.password && <p>{errors.password}</p>}
-
-              <p>
-                <label htmlFor='confirmPassword'>Подтвердите пароль</label><br />
-                <input type='password' name='confirmPassword' onChange={handleChange} onBlur={handleBlur} value={values.confirmPassword} />
-              </p>
-              {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-
-              <p>
-                <label htmlFor='email'>Email</label><br />
-                <input type='email' name='email' onChange={handleChange} onBlur={handleBlur} value={values.email} />
-              </p>
-              {touched.email && errors.email && <p>{errors.email}</p>}
-
-              <p>
-                <label htmlFor='confirmEmail'>Подтвердите email</label><br />
-                <input type='email' name='confirmEmail' onChange={handleChange} onBlur={handleBlur} value={values.confirmEmail} />
-              </p>
-              {touched.confirmEmail && errors.confirmEmail && <p>{errors.confirmEmail}</p>}
-              <button
-                disabled={!isValid && !dirty}
-                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                  handleSubmit(); saveData(values)
-                }}
-                type='submit' >Отправить</button>
+              
             </div>
           )
         }}
       </Formik>
+      <ButtonDelete />
+      <ButtonClear/>
     </div>
   );
 };
 
-export default Form
+export default Form;
