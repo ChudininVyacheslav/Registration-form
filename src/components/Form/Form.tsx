@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Form.module.scss'
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { Values } from './interfaces';
+import { IValues } from './interfaces';
 import { ADD_DATA } from '../../store/registration/actionTypes';
 import { validationSchema } from './registrationFormSchema';
 import { initialValues } from './initialValues';
@@ -11,17 +11,12 @@ import ButtonSubmit from './ButtonSubmit/ButtonSubmit';
 import ButtonDelete from './ButtonDelete/ButtonDelete';
 import ButtonClear from './ButtonClear/ButtonClear';
 import Input from './Input/Input';
-
-// установил React-Router-Dom
-
-let form = document.getElementById('form');
-
-
+import Enter from './Enter/Enter';
 
 const Form = () => {
   const dispatch = useDispatch();
 
-  function saveData(values: Values): void {
+  function saveData(values: IValues): void {
     dispatch({ type: ADD_DATA, payload: values });
   };
 
@@ -32,7 +27,6 @@ const Form = () => {
         initialValues={initialValues}
         validateOnBlur
         onSubmit={(values) => { saveData(values) }}
-        // 
         validationSchema={validationSchema}
       >
         {({
@@ -43,12 +37,12 @@ const Form = () => {
           handleBlur,
           isValid,
           handleSubmit,
-          dirty
+          dirty,
+          resetForm
         }) => {
           return (
             <div>
               <form
-                id='form'
                 onSubmit={handleSubmit}>
                 <Input
                   label='Фамилия'
@@ -59,9 +53,9 @@ const Form = () => {
                   value={values.secondName}
                   errorMessage={touched.secondName && errors.secondName
                     ? errors.secondName
-                    :undefined}
+                    : undefined}
                 />
-                 <Input
+                <Input
                   label='Имя'
                   name='name'
                   type='text'
@@ -70,7 +64,7 @@ const Form = () => {
                   value={values.name}
                   errorMessage={touched.name && errors.name
                     ? errors.name
-                    :undefined}
+                    : undefined}
                 />
                 <Input
                   label='Пароль'
@@ -81,7 +75,7 @@ const Form = () => {
                   value={values.password}
                   errorMessage={touched.password && errors.password
                     ? errors.password
-                    :undefined}
+                    : undefined}
                 />
                 <Input
                   label='Подтвердите пароль'
@@ -92,7 +86,7 @@ const Form = () => {
                   value={values.confirmPassword}
                   errorMessage={touched.confirmPassword && errors.confirmPassword
                     ? errors.confirmPassword
-                    :undefined}
+                    : undefined}
                 />
                 <Input
                   label='Email'
@@ -103,9 +97,9 @@ const Form = () => {
                   value={values.email}
                   errorMessage={touched.email && errors.email
                     ? errors.email
-                    :undefined}
+                    : undefined}
                 />
-                 <Input
+                <Input
                   label='Подтвердите email'
                   name='confirmEmail'
                   type='email'
@@ -114,19 +108,20 @@ const Form = () => {
                   value={values.confirmEmail}
                   errorMessage={touched.confirmEmail && errors.confirmEmail
                     ? errors.confirmEmail
-                    :undefined}
+                    : undefined}
                 />
                 <ButtonSubmit
                   disabled={!isValid && !dirty} />
               </form>
-
-              
+              <Enter />
+              <ButtonClear
+                onClick={() => { resetForm() }}
+              />
             </div>
           )
         }}
       </Formik>
       <ButtonDelete />
-      <ButtonClear/>
     </div>
   );
 };

@@ -1,16 +1,16 @@
 import React from 'react';
-
-interface IProps {
-    disabled: boolean;
-}
+import styles from './ButtonSubmit.module.scss';
+import { IProps } from './interfaces';
 
 const ButtonSubmit: React.FC<IProps> = ({ disabled }) => {
     return (
         <button
+            className={styles.button}
             disabled={disabled}
-            type='submit' >Отправить
+            type='submit'>
+            Зарегистрироваться
         </button>
-    )
+    );
 };
 
 export default ButtonSubmit;

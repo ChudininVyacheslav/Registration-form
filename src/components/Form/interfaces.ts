@@ -1,4 +1,4 @@
-export interface Values {
+export interface IValues {
     name: string;
     secondName: string;
     password: string;

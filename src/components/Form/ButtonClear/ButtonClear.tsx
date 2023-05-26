@@ -1,14 +1,13 @@
 import React from 'react';
-// import { clearInputs } from '../Input/Input';
+import styles from './ButtonClear.module.scss';
+import { Iprops } from './interfaces';
 
-const ButtonClear = () => {
+const ButtonClear: React.FC<Iprops> = ({ onClick }) => {
     return (
-        <button
-            // onClick={() => { clearInputs() }}
-        >
+        <button className={styles.button} onClick={() => { onClick() }}>
             Отчистить
         </button>
-    )
+    );
 };
 
 export default ButtonClear;
