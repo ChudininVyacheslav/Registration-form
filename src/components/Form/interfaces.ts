@@ -5,4 +5,8 @@ export interface IValues {
     confirmPassword: string;
     email: string;
     confirmEmail: string;
-  };
+};
+  
+export interface IErrors {
+  password?: string;
+};

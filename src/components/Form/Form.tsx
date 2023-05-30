@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Form.module.scss'
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { IValues } from './interfaces';
+import { IErrors, IValues } from './interfaces';
 import { ADD_DATA } from '../../store/registration/actionTypes';
 import { validationSchema } from './registrationFormSchema';
 import { initialValues } from './initialValues';
@@ -16,11 +16,18 @@ import Enter from './Enter/Enter';
 const Form = () => {
   const dispatch = useDispatch();
 
+  const [modalActive, setModalActive] = useState(true);
+
   function saveData(values: IValues): void {
     dispatch({ type: ADD_DATA, payload: values });
   };
 
   return (
+    // <div className={modalActive ? styles['modal-active'] : styles['modal']}
+    //         onClick={() => {
+    //           setModalActive(false)
+    //         }}
+    // >
     <div className={styles.form}>
       <Title />
       <Formik
@@ -28,6 +35,21 @@ const Form = () => {
         validateOnBlur
         onSubmit={(values) => { saveData(values) }}
         validationSchema={validationSchema}
+        validate={values => {
+          const errors: IErrors = {};
+          if (!/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(values.password)) {
+            errors.password = 'Пароль должен содержать 0-9';
+          }
+          else if (!/^(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(values.password)) {
+            errors.password = 'Пароль должен содержать A-Z';
+          }
+          else if (
+            !/^(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(values.password)
+          ) {
+            errors.password = 'Введите корректный пароль';
+          }
+          return errors;
+        }}
       >
         {({
           values,
@@ -110,8 +132,13 @@ const Form = () => {
                     ? errors.confirmEmail
                     : undefined}
                 />
+                <button>
                 <ButtonSubmit
-                  disabled={!isValid && !dirty} />
+                  disabled={!isValid && !dirty}
+                  active={modalActive}
+                  setActive={setModalActive}
+                  />
+                  </button>
               </form>
               <Enter />
               <ButtonClear
@@ -123,6 +150,7 @@ const Form = () => {
       </Formik>
       <ButtonDelete />
     </div>
+    // </div>
   );
 };
 

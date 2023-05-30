@@ -51,6 +51,7 @@ const Login = () => {
                   onChange={handleChange}
                   value={values.name}
                 />
+                {values.name !== '' && <p className={styles['error-name']}>Неверное имя</p>}
                 <input
                   className={styles.input}
                   placeholder='Пароль'
@@ -59,11 +60,14 @@ const Login = () => {
                   onChange={handleChange}
                   value={values.password}
                 />
+                {values.password !== '' && <p className={styles['error-password']}>Неверное пароль</p>}
                 {checkData(user, values) ? <button
                   className={styles.button}
                   type='submit'>
                   <Link className={styles.link} to={'/greeting'}>Войти</Link></button> :
-                  <LoginBtn />}
+                  <LoginBtn
+                  />
+                }
                 <button
                   className={styles.button}
                 ><Link className={styles.link} to={'/'}>Регистрация</Link></button>
@@ -71,7 +75,7 @@ const Login = () => {
             </div>
           )
         }}
-      </Formik>
+      </Formik>      
     </div>
   );
 };
