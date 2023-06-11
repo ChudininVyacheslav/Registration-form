@@ -7,7 +7,6 @@ const ButtonSubmit: React.FC<IProps> = ({ disabled, isOpend, onModalClose, onCli
     return (
         <div>
             <div className={styles[`modal__wrapper-${isOpend ? 'open' : 'close'}`]}>
-
                 <div className={styles['modal__body']}>
                     <div className={styles['modal__close']} onClick={onModalClose}>&times;</div>
                     <h2>Вы успешно зарегистрировались, перейдите на страницу входа</h2>
@@ -21,7 +20,6 @@ const ButtonSubmit: React.FC<IProps> = ({ disabled, isOpend, onModalClose, onCli
                 type='submit'>
                 Зарегистрироваться
             </button>
-
         </div>
     );
 };

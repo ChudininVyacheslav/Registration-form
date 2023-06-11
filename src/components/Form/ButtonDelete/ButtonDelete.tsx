@@ -15,7 +15,7 @@ const ButtonDelete = () => {
             className={styles.button}
             onClick={deleteUser}
         >
-            Удалить
+            Удалить аккаунт
         </button>
     );
 };

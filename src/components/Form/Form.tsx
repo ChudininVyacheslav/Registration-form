@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Form.module.scss'
 import { Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { IErrors, IValues } from './interfaces';
 import { ADD_DATA } from '../../store/registration/actionTypes';
 import { validationSchema } from './registrationFormSchema';
@@ -13,7 +13,6 @@ import ButtonClear from './ButtonClear/ButtonClear';
 import Input from './Input/Input';
 import ButtonEnter from './ButtonEnter/ButtonEnter';
 
-
 const Form = () => {
   const dispatch = useDispatch();
 
@@ -24,7 +23,6 @@ const Form = () => {
   };
 
   return (
-
     <div className={styles.form}>
         <Title />
         <Formik
@@ -129,24 +127,16 @@ const Form = () => {
                       ? errors.confirmEmail
                       : undefined}
                   />
-
                   <ButtonSubmit
                     disabled={!isValid && !dirty}
                     isOpend={modal}
                     onModalClose={() => setModal(false)}
                     onClick={() => {
-                      console.log(2)
                       if (isValid && dirty) {
-                        console.log(1)
                         setModal(true)
                       }
                     }}
                     />
-                  {/* <button className={styles.button}
-                    disabled={!isValid && !dirty}
-                    type='submit'>
-                    Зарегистрироваться
-                  </button> */}
                 </form>
                 <ButtonEnter />
                 <ButtonClear
