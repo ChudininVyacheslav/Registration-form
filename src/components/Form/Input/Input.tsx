@@ -25,7 +25,7 @@ const Input: React.FC<IProps> = ({
           placeholder={label}
           {...props}
         />
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+        {errorMessage && value !== '' ? <p className={styles.error}>{errorMessage}</p> : false}
       </p>
     </div>
   );

@@ -51,7 +51,7 @@ const Login = () => {
                   onChange={handleChange}
                   value={values.name}
                 />
-                {values.name !== '' &&  checkData(user, values) ? true : <p className={styles['error-name']}>Неверное имя или пароль</p>}
+                {values.name !== '' &&  checkData(user, values) ? true : values.name === ''? true : <p className={styles['error-name']}>Неверное имя или пароль</p>}
                 <input
                   className={styles.input}
                   placeholder='Пароль'
