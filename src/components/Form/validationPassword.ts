@@ -4,7 +4,6 @@ export function validationPassword(values: IValues) {
   const errors: IErrors = {};
   switch (true) {
     case (!/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{1,10}$/.test(values.password)):
-      console.log(2)
       errors.password = 'Пароль должен содержать не менее одной цифры';
       return errors;
     case (!/^(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{1,10}$/.test(values.password)):

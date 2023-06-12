@@ -3,19 +3,19 @@ import styles from './Modal.module.scss';
 
 export interface IProps {
     isOpend: boolean;
-    onModalClose: () => void;
-    children?: React.ReactNode;
+    children: React.ReactNode;
 };
 
-const Modal: React.FC<IProps> = ({ isOpend, onModalClose }) => {
+const Modal: React.FC<IProps> = ({ isOpend, children }) => {
+    
     return (
         <div className={`${styles.modal} ${isOpend ? styles['modal_opened'] : ''}`}>
             <div className={styles['modal__body']}>
-                <div className={styles['modal__close']} onClick={onModalClose}>&times;</div>
-                <div>Вы успешно зарегистрировались, перейдите на страницу входа</div>
+                <div className={styles['modal__btn']}>{children}</div>
+                <h1 className={styles['modal__title']}>Вы успешно зарегистрировались, перейдите на страницу входа</h1>
             </div>
         </div>
-    )
-}
-
-export default Modal
+    );
+};
+    
+export default Modal;

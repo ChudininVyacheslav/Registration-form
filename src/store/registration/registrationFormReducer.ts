@@ -15,12 +15,8 @@ const inintialState: IRegistrationState = {
 export const registrationFormReducer = (state = inintialState, action: Action): any => {
     switch (action.type) {
         case ADD_DATA:
-            console.log('добавлено');
-            console.log(state)
             return { ...state, ...action.payload };
         case DELETE_DATA:
-            console.log('удалено');
-            console.log(state);
             return inintialState;
         default:
             return state;

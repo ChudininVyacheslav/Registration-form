@@ -1,18 +1,15 @@
-import React from 'react';
 import styles from './Login.module.scss';
 import Title from './Title/Title';
-import LoginBtn from './LoginBtn/LoginBtn';
 import { useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { initialValues } from './initialValues';
 import { IValues } from './interfaces';
-import { Link } from 'react-router-dom';
+import Button from '../common/Button/Button';
 
 type TDataUSer = Record<string, string>;
 
 function checkData(user: TDataUSer, values: IValues) {
   if (user.name === values.name && user.password === values.password) {
-    console.log('сработало')
     if (user.name === '' && user.password === '') {
       return false;
     };
@@ -51,7 +48,7 @@ const Login = () => {
                   onChange={handleChange}
                   value={values.name}
                 />
-                {values.name !== '' &&  checkData(user, values) ? true : values.name === ''? true : <p className={styles['error-name']}>Неверное имя или пароль</p>}
+                {values.name !== '' && checkData(user, values) ? true : values.name === '' ? true : <p className={styles['error-name']}>Неверное имя или пароль</p>}
                 <input
                   className={styles.input}
                   placeholder='Пароль'
@@ -61,21 +58,23 @@ const Login = () => {
                   value={values.password}
                 />
                 {/* {values.password !== '' && checkData(user, values) ? true : <p className={styles['error-password']}>Неверный пароль</p>} */}
-                {checkData(user, values) ? <button
-                  className={styles.button}
-                  type='submit'>
-                  <Link className={styles.link} to={'/greeting'}>Войти</Link></button> :
-                  <LoginBtn
-                  />
-                }
-                <button
-                  className={styles.button}
-                ><Link className={styles.link} to={'/'}>Регистрация</Link></button>
+                {checkData(user, values) ? <Button
+                  label={'Войти'}
+                  linkEnter={true}
+                  linkPath={'/greeting'}
+                /> : <Button
+                  label={'Войти'}
+                />}
+                <Button
+                  label={'Регистрация'}
+                  linkEnter={true}
+                  linkPath={'/'}
+                />
               </form>
             </div>
           )
         }}
-      </Formik>      
+      </Formik>
     </div>
   );
 };

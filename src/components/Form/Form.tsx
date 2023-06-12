@@ -7,11 +7,7 @@ import { ADD_DATA } from '../../store/registration/actionTypes';
 import { validationSchema } from './registrationFormSchema';
 import { initialValues } from './consts';
 import Title from './Title/Title';
-import ButtonSubmit from './ButtonSubmit/ButtonSubmit';
-import ButtonDelete from './ButtonDelete/ButtonDelete';
-import ButtonClear from './ButtonClear/ButtonClear';
 import Input from './Input/Input';
-import ButtonEnter from './ButtonEnter/ButtonEnter';
 import Modal from '../common/Modal/Modal';
 import { validationPassword } from './validationPassword';
 import Button from '../common/Button/Button';
@@ -29,8 +25,12 @@ const Form = () => {
     <div className={styles.form}>
       <Modal
         isOpend={modal}
-        onModalClose={() => setModal(false)}
-      />
+      >
+        <Button
+          label='Закрыть'
+          onClick={() => setModal(false)}
+        />
+      </Modal>
       <Title />
       <Formik
         initialValues={initialValues}
@@ -55,6 +55,7 @@ const Form = () => {
             <div>
               <form
                 onSubmit={handleSubmit}>
+                <div className={styles.input}>
                 <Input
                   label='Фамилия'
                   name='secondName'
@@ -120,43 +121,38 @@ const Form = () => {
                   errorMessage={touched.confirmEmail && errors.confirmEmail
                     ? errors.confirmEmail
                     : undefined}
-                />
-                <Button
-                  label={'Зарегистрироваться'}
-                  disabled={!isValid && !dirty}
-                  onClick={() => {
-                    if (isValid && dirty) {
-                      setModal(true)
-                    }
-                  }}
-                />
-                {/* <ButtonSubmit
-                  disabled={!isValid && !dirty}
-                  onClick={() => {
-                    if (isValid && dirty) {
-                      setModal(true)
-                    }
-                  }}
-                /> */}
+                  />
+                  </div>
+                <div className={styles.btn}>
+                  <Button
+                    label={'Зарегистрироваться'}
+                    disabled={!isValid && !dirty}
+                    onClick={() => {
+                      if (isValid && dirty) {
+                        setModal(true)
+                      }
+                    }}
+                  />
+                  <Button
+                    label={'Войти'}
+                    linkEnter={true}
+                    linkPath={'/login'}
+                  />
+                </div>
+                <div className={styles.btn}>
+                  <Button
+                    label={'Очистить'}
+                    onClick={() => { resetForm() }}
+                  />
+                  <Button
+                    label={'Удалить аккаунт'}
+                  />
+                </div>
               </form>
-              <Button
-                  label={'Войти'}
-                  linkEnter={true}
-                />
-              {/* <ButtonEnter /> */}
-              <Button
-                  label={'Очистить'}
-                  onClick={() => { resetForm() }}
-                />
-              {/* <ButtonClear
-                onClick={() => { resetForm() }}
-              /> */}
-               <ButtonDelete />
             </div>
           )
         }}
       </Formik>
-      
     </div>
   );
 };

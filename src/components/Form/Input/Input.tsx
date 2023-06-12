@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './Input.module.scss';
-import { IProps } from './interfaces';
+import Tooltips from './Tooltips/Tooltips';
+
+export interface IProps extends React.HTMLProps<HTMLInputElement> {
+  label: string;
+  errorMessage?: string;
+  value: string;
+};
 
 const Input: React.FC<IProps> = ({
   label,
@@ -25,7 +31,10 @@ const Input: React.FC<IProps> = ({
           placeholder={label}
           {...props}
         />
-        {errorMessage && value !== '' ? <p className={styles.error}>{errorMessage}</p> : false}
+        <Tooltips
+          errorMessage={errorMessage}
+          value={value}
+        />
       </p>
     </div>
   );

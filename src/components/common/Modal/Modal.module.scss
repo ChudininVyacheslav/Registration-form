@@ -15,33 +15,20 @@
         margin: auto;
         background: white;
         border-radius: 10px;
+
+        .modal__btn {
+            float: right;
+            margin-top: 5px;
+            margin-right: 20px;
+        }
+
+        .modal__title {
+            margin-left: 5px;
+            font-size: 30px;
+        }
     }
-
-    
-    // bottom: 0;
-    // width: 80%;
-    // display: block;
-    // left: 150px;
-
-    // .modal__body {
-    //     max-width: 500px;
-    //     margin: auto;
-    //     background: white;
-    //     margin-top: 5%;
-    //     padding: 20px;
-    //     border-radius: 10px;
-    //     max-width: 100%;
-
-    //     .modal__close {
-    //         text-align: right;
-    //         margin-top: -15px;
-    //         font-size: 40px;
-    //         color: grey;
-    //         cursor: pointer;
-    //     }
-
-    // }
 }
+
 .modal_opened {
     display: flex;
 }
