@@ -58,18 +58,23 @@ const Login = () => {
                   value={values.password}
                 />
                 {/* {values.password !== '' && checkData(user, values) ? true : <p className={styles['error-password']}>Неверный пароль</p>} */}
-                {checkData(user, values) ? <Button
-                  label={'Войти'}
-                  linkEnter={true}
-                  linkPath={'/greeting'}
-                /> : <Button
-                  label={'Войти'}
-                />}
-                <Button
-                  label={'Регистрация'}
-                  linkEnter={true}
-                  linkPath={'/'}
-                />
+                <div className={styles.btn}>
+                  {checkData(user, values) ? <Button
+                    btnType='link'
+                    label='Войти'
+                    linkEnter={true}
+                    linkPath={'/greeting'}
+                  /> : <Button
+                    btnType='button'
+                    label='Войти'
+                  />}
+                  <Button
+                    btnType='link'
+                    label={'Регистрация'}
+                    linkEnter={true}
+                    linkPath={'/'}
+                  />
+                </div>
               </form>
             </div>
           )
