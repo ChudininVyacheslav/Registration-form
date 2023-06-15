@@ -1,43 +1,35 @@
-import { Link } from 'react-router-dom';
-import styles from './Button.module.scss';
+import ButtonLink from "./ButtonLink/ButtonLink";
+import ButtomBase from "./ButtonBase/ButtomBase";
 
 interface IProps {
-  btnType: string;
+  btnType?: "link";
   label: string;
-  disabled?: boolean;
+  disabled?: boolean | any;
   onClick?: () => void;
-  linkEnter?: Boolean;
-  linkPath?: string | any;
-};
+  path?: string | any;
+}
 
-const Button: React.FC<IProps> = ({ btnType, label, disabled, onClick, linkEnter, linkPath }) => {
-
-  switch (btnType) {
-    case 'link':
-      return (
-        <div>
-          {linkEnter ? <button className={styles.button}>
-            <Link className={styles.link} to={linkPath}>
-              {label}
-            </Link>
-          </button> : <button
-            className={styles.button}
-            disabled={disabled}
-            onClick={onClick}
-          >{label}</button>}
-        </div>
-      )
-      default:
-        return (
-          <div>
-            <button
-              className={styles.button}
-              disabled={disabled}
-              onClick={onClick}
-            >{label}</button>
-          </div>
-        )
-  };
+const Button: React.FC<IProps> = ({
+  btnType,
+  label,
+  disabled = false,
+  onClick,
+  path,
+}) => {
+  return (
+    <div>
+      {btnType === "link" && (
+        <ButtonLink label={label} path={path}></ButtonLink>
+      )}
+      {!btnType && (
+        <ButtomBase
+          onClick={onClick}
+          label={label}
+          disabled={disabled}
+        ></ButtomBase>
+      )}
+    </div>
+  );
 };
 
 export default Button;

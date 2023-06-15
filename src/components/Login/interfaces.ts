@@ -1,4 +1,4 @@
 export interface IValues {
-    name: string;
-    password: string;
-  };
+  name: string;
+  password: string;
+}

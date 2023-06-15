@@ -1,37 +1,18 @@
 .component {
+  .field {
+    display: flex;
+    justify-content: flex-start;
 
-    .field {
-        display: flex;
-        justify-content: flex-start;
-
-        .input {
-            height: 22px;
-            margin: auto;
-            background-color: rgb(229, 238, 235);
-            border: 0;
-            border-bottom: 1px solid black;
-        }
-
-        .input:focus {
-            outline: none;
-        }
-
-        .error {
-            width: 380px;
-            height: 35px;
-            position: absolute;
-            margin: -15px;
-            margin-left: 250px;
-            line-height: 35px;
-            padding-left: 5px;
-            padding-right: 5px;
-            text-align: center;
-            background-color: white;
-            border: 1px solid darkred;
-            border-radius: 5px;
-            -webkit-box-shadow: 0px 7px 14px -7px rgba(34, 60, 80, 0.6);
-            -moz-box-shadow: 0px 7px 14px -7px rgba(34, 60, 80, 0.6);
-            box-shadow: 0px 7px 14px -7px rgba(34, 60, 80, 0.6);
-        }
+    .input {
+      height: 22px;
+      margin: auto;
+      background-color: rgb(229, 238, 235);
+      border: 0;
+      border-bottom: 1px solid black;
     }
+
+    .input:focus {
+      outline: none;
+    }
+  }
 }

@@ -1,12 +1,16 @@
-import styles from './Greeting.module.scss';
-import Title from './Title/Title';
+import {useSelector} from "react-redux";
+import Title from "../common/Title/Title";
+import styles from "./Greeting.module.scss";
+import {IReducerState} from "../Login/Login";
 
 const Greeting = () => {
-    return (
-        <div className={styles.container}>
-            <Title />
-        </div>
-    );
+  const user = useSelector<IReducerState, IReducerState>((state) => state);
+
+  return (
+    <div className={styles.container}>
+      <Title text={`Здравствуйте, ${user.user.name}`} />
+    </div>
+  );
 };
 
 export default Greeting;
