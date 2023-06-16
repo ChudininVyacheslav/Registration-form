@@ -5,7 +5,7 @@ import {IValues} from "./interfaces";
 import {ADD_DATA, DELETE_DATA} from "../../store/registration/actionTypes";
 import {validationSchema} from "./registrationFormSchema";
 import {initialValues} from "./consts";
-import Input from "./Input/Input";
+import Input from "../common/Input/Input";
 import {validationPassword} from "./validationPassword";
 import Button from "../common/Button/Button";
 import Title from "../common/Title/Title";

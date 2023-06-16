@@ -5,7 +5,7 @@ import {Formik} from "formik";
 import {initialValues} from "./initialValues";
 import {IValues} from "./interfaces";
 import Button from "../common/Button/Button";
-import Input from "../Form/Input/Input";
+import Input from "../common/Input/Input";
 import {IRegistrationState} from "../../store/registration/interfaces";
 
 function dataValidation(user: IReducerState, values: IValues) {

@@ -6,7 +6,7 @@ interface IProps {
   disabled?: Boolean | any;
 }
 
-const ButtomBase: React.FC<IProps> = ({ onClick, label, disabled }) => {
+const ButtomBase: React.FC<IProps> = ({onClick, label, disabled}) => {
   return (
     <button className={styles.button} disabled={disabled} onClick={onClick}>
       {label}
