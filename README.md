@@ -1,4 +1,4 @@
-Стек: React, TypeScript, Redux, Router-dom, Formik.
+Стек: React, TypeScript, Redux, Formik.
 Мини проект Форма регистрации с несколькими страницами. 
 
 Первая страница.
