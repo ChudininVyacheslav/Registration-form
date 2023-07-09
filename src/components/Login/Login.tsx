@@ -42,6 +42,7 @@ const Login = () => {
           errors,
           handleChange,
         }) => {
+          const resultDataValidation = dataValidation(user, values);
           return (
             <div>
               <form className={styles.form} onSubmit={handleSubmit}>
@@ -70,9 +71,10 @@ const Login = () => {
                   }
                 />
                 <div className={styles.btn}>
-                  {dataValidation(user, values) ? (
+                  {resultDataValidation && (
                     <Button btnType="link" label="Войти" path="/greeting" />
-                  ) : (
+                  )}
+                  {!resultDataValidation && (
                     <Button
                       label="Войти"
                       disabled={values.name && values.password ? false : true}
