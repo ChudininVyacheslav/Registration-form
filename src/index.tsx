@@ -10,15 +10,15 @@ import Greeting from "./components/Greeting/Greeting";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Registration-form",
     element: <App />,
   },
   {
-    path: "/login",
+    path: "/Registration-form/login",
     element: <Login />,
   },
   {
-    path: "/greeting",
+    path: "/Registration-form/greeting",
     element: <Greeting />,
   },
 ]);

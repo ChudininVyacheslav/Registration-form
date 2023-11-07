@@ -140,7 +140,7 @@ const Form = () => {
                       }
                     }}
                   />
-                  <Button btnType="link" label="Войти" path="/login" />
+                  <Button btnType="link" label="Войти" path="/Registration-form/login" />
                 </div>
                 <div className={styles.btn}>
                   <Button

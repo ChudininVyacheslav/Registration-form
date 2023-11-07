@@ -72,7 +72,7 @@ const Login = () => {
                 />
                 <div className={styles.btn}>
                   {resultDataValidation && (
-                    <Button btnType="link" label="Войти" path="/greeting" />
+                    <Button btnType="link" label="Войти" path="/Registration-form/greeting" />
                   )}
                   {!resultDataValidation && (
                     <Button
@@ -80,7 +80,7 @@ const Login = () => {
                       disabled={values.name && values.password ? false : true}
                     />
                   )}
-                  <Button btnType="link" label="Регистрация" path="/" />
+                  <Button btnType="link" label="Регистрация" path="/Registration-form" />
                 </div>
               </form>
             </div>
